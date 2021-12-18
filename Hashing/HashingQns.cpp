@@ -21,13 +21,67 @@ int union_of_two_array_On(int *,int *,int m,int n);
 void solve_pair_with_given_sum();
 bool pair_with_given_sum_On2(int *,int n,int sum);
 bool pair_with_given_sum_On(int *,int ,int );
+void solve_is_0sum_subarray();
+bool is_0sum_subarray_On2(int *arr,int n);
+bool is_0sum_subarray_On(int *,int n);
 int main()
 {
-    solve_pair_with_given_sum();
+    solve_is_0sum_subarray();
+//    solve_pair_with_given_sum();
  //   solve_union_of_two_array();
     //solve_intersection_of_two_array();
     //solve_distinct_ele_counts();
     //solve_freq_of_array_ele();
+}
+void solve_is_0sum_subarray()
+{
+    int n;
+    cin>>n;
+    int *arr=new int[n];
+    input(arr,n);
+    bool isPres=is_0sum_subarray_On2(arr,n);
+    if(isPres)
+        cout<<"found "<<endl;
+    else{
+        cout<<"not found"<<endl;
+    }
+    bool isPres1=is_0sum_subarray_On(arr,n);
+    if(isPres1)
+        cout<<"found in O(n)"<<endl;
+    else{
+            cout<<"not found in O(n)"<<endl;
+        }
+    //isPres1?(cout<<"found in O(n)"); : cout<<"not found in O(n)"
+}
+bool is_0sum_subarray_On(int * arr,int n)
+{
+    unordered_set<int>s;
+    int pre_sum=0;
+    for(int i=0;i<n;i++)
+    {
+        pre_sum+=arr[i];
+        if(pre_sum==0)
+            return true;
+        if(s.find(pre_sum)!=s.end())
+            return true;
+        s.insert(pre_sum);
+        
+    }
+    return false;
+}
+bool is_0sum_subarray_On2(int *arr,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        int curr_sum=0;
+        for(int j=i;j<n;j++)
+        {
+            curr_sum+=arr[j];
+            if(curr_sum==0)
+                return true;
+        }
+    }
+    return false;
 }
 bool pair_with_given_sum_On(int *arr,int n,int sum)
 {
